@@ -128,6 +128,7 @@ public class FetchData extends AsyncTask<Object, String, String> {
                         ArrayList<String> markerPhotoReferences = (ArrayList<String>) data[4];
                         Boolean markerIsOpenNow = (Boolean) data[5];
 
+
                         LatLng markerDirLatLng = marker.getPosition();
                         LocationHolder.setDestinationLocation(markerDirLatLng);
 

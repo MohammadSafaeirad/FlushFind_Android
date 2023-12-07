@@ -5,9 +5,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -22,9 +24,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
 
 public class WashroomDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -45,6 +52,10 @@ public class WashroomDetailsActivity extends AppCompatActivity implements OnMapR
     private ListView listViewComments;
     private ArrayAdapter<String> commentsAdapter;
 
+    GoogleMap map;
+
+    MarkerOptions place1,place2;
+    Polyline currentPolyline;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +66,14 @@ public class WashroomDetailsActivity extends AppCompatActivity implements OnMapR
 
 
 
+
     private void initialize() {
+
         // Get the Washroom object from Intent
         washroom = (Washroom) getIntent().getSerializableExtra("washroom");
 
         // Find TextViews and ImageView in the layout
+
         textViewName = findViewById(R.id.textViewName);
         textViewAddress = findViewById(R.id.textViewAddress);
         textViewLatitude = findViewById(R.id.textViewLatitude);
@@ -81,6 +95,7 @@ public class WashroomDetailsActivity extends AppCompatActivity implements OnMapR
 
     private void displayInfo() {
 
+
         buttonGetDirections.setOnClickListener(v -> {
             LatLng destinationLocation = LocationHolder.getDestinationLocation();
             Location currentLocation = LocationHolder.getCurrentLocation();
@@ -93,6 +108,7 @@ public class WashroomDetailsActivity extends AppCompatActivity implements OnMapR
                 intent.putExtra("destination_lng", destinationLocation.longitude);
                 startActivity(intent);
             } else {
+
                 Toast.makeText(WashroomDetailsActivity.this, "Washroom location not available", Toast.LENGTH_SHORT).show();
             }
 
