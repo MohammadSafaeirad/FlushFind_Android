@@ -28,7 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class WashroomDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class WashroomDetailsActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener {
 
 
     TextView textViewName;
@@ -73,6 +73,7 @@ public class WashroomDetailsActivity extends AppCompatActivity implements OnMapR
         editTextComment = findViewById(R.id.editTextComment);
 
         buttonGetDirections= findViewById(R.id.buttonGetDirections);
+        buttonGetDirections.setOnClickListener(this);
 
         listViewComments = findViewById(R.id.listViewComments);
         commentsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
@@ -230,6 +231,25 @@ public class WashroomDetailsActivity extends AppCompatActivity implements OnMapR
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+            LatLng destinationLocation = LocationHolder.getDestinationLocation();
+            Location currentLocation = LocationHolder.getCurrentLocation();
+
+            if (currentLocation != null && destinationLocation != null) {
+                Intent intent = new Intent(WashroomDetailsActivity.this, DirectionActivity.class);
+                intent.putExtra("current_lat", currentLocation.getLatitude());
+                intent.putExtra("current_lng", currentLocation.getLongitude());
+                intent.putExtra("destination_lat", destinationLocation.latitude);
+                intent.putExtra("destination_lng", destinationLocation.longitude);
+                startActivity(intent);
+            } else {
+                Toast.makeText(WashroomDetailsActivity.this, "Washroom location not available", Toast.LENGTH_SHORT).show();
+            }
 
     }
 }

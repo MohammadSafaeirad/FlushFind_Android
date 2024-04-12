@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.placesprojectdemo.MapsActivity;
+import com.example.placesprojectdemo.PersmissionsActivity;
 import com.example.placesprojectdemo.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity {
 
                         if (task.isSuccessful()){
                             Toast.makeText(Login.this, "Welcome back to FlushFinder!", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(Login.this, MapsActivity.class);
+                            Intent intent = new Intent(Login.this, PersmissionsActivity.class);
                             startActivity(intent);
                             finish();
                         }
